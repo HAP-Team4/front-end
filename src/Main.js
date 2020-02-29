@@ -2,6 +2,8 @@ import React from 'react';
 import "./Main.css";
 import { ListOfMovies } from './ListOfMovies';
 import MovieForm from './components/MovieForm';
+import LoginForm from './components/LoginForm';
+
 import { Genre } from './Genre';
 import Modal from 'react-modal';
 
@@ -9,6 +11,7 @@ export class Main extends React.Component {
 	constructor () {
 		super();
 		this.state = {
+			loginFormOpen: false,
 			movieFormOpen: false,
 			all_movies: [],
 			featured_movies: [],
@@ -39,12 +42,6 @@ export class Main extends React.Component {
 				location: "University College London, London"
 			},
 		]);
-
-		this.toggleOpenMovieForm = () => {
-			this.setState({
-				movieFormOpen: !this.state.movieFormOpen
-			})
-		}
 	}
 
 	got_movies(movies) {
@@ -64,9 +61,24 @@ export class Main extends React.Component {
 		}, [])
 		this.forceUpdate()
 	}
+	toggleOpenMovieForm = () => {
+		this.setState({
+			movieFormOpen: !this.state.movieFormOpen
+		})
+	}
+	toggleOpenLoginForm = () => {
+		this.setState({
+			loginFormOpen: !this.state.loginFormOpen
+		})
+	}
 	closeModal = () => {
 		this.setState({
 			movieFormOpen: false
+		})
+	}
+	closeLoginModal = () => {
+		this.setState({
+			loginFormOpen: false
 		})
 	}
 
@@ -75,7 +87,11 @@ export class Main extends React.Component {
 			<div className="topbar">
 				{this.maybeRenderBackButton()}
 				<div className="appname">MovieApp</div>
-				<div className="button" onClick={this.toggleOpenMovieForm}>Add new proposal</div>
+				<div className="button" onClick={this.toggleOpenLoginForm}>Login</div>
+				<Modal isOpen={this.state.loginFormOpen} onRequestClose={this.closeLoginModal}>
+					<LoginForm closeModal={this.closeLoginModal}/>
+				</Modal>
+				<div className="button" onClick={this.toggleOpenMovieForm}>Create new movie</div>
 				<Modal isOpen={this.state.movieFormOpen} onRequestClose={this.closeModal}>
 					<MovieForm closeModal={this.closeModal}/>
 				</Modal>
