@@ -1,4 +1,8 @@
 .main {
+	background-color: black;
+	min-height: 1000px;
+    height: auto !important;
+    height: 1000px;
 }
 
 .topbar {
@@ -24,7 +28,8 @@
 }
 
 .main h2 {
-	font-weight: normal;
+	font-weight: bold;
+	color: white;
 	padding: 0;
 	margin: 5px;
 	font-size: 30px;
@@ -42,6 +47,7 @@
 
 .main-contain {
 	max-width: 1000px;
+	min-height: 100%;
 	margin: 0 auto;
 	padding: 0 10px;
 }
