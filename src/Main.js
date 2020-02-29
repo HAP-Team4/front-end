@@ -4,8 +4,14 @@ import { ListOfMovies } from './ListOfMovies';
 import MovieForm from './components/MovieForm';
 import LoginForm from './components/LoginForm';
 import SearchBar from './components/SearchBar';
-import { Genre } from './Genre';
 import Modal from 'react-modal';
+import MovieLists from './MovieLists';
+
+export const server_base = "http://localhost:8080"
+export let current_uid = null
+export let set_movie_as_going;
+export let login;
+export let create_movie;
 
 export class Main extends React.Component {
 	constructor () {
@@ -19,34 +25,42 @@ export class Main extends React.Component {
 			genre_filter: null,
 			genres: [],
 		};
-		this.got_movies([
-			{
-				title: "Hello world",
-				attendee: "0 1 2 3 4 5 6 7",
-				date: "2020-01-01T00:00:00Z",
-				genre: "Horror",
-				location: "Some Cinema, London"
-			},
-			{
-				title: "Hello!",
-				attendee: "0 1 2 3",
-				date: "2020-01-02T00:00:00Z",
-				genre: "Comedy",
-				location: "Cinema 2, London"
-			},
-			{
-				title: "world!",
-				attendee: "0 1 2 3 4 5 6",
-				date: "2020-01-03T00:00:00Z",
-				genre: "Romance",
-				location: "University College London, London"
-			},
-		]);
+
+		this.request_all_movies();
+
+		set_movie_as_going = async (movie_id) => {
+			await fetch(`${server_base}/going?movie_id=${encodeURIComponent(movie_id.toString())}&user_id=${encodeURIComponent(current_uid)}`, {method: "PUT"})
+			this.request_all_movies()
+		}
+
+		login = async (user_name, password) => {
+			let h = new Headers();
+			h.set("Content-Type", "application/json")
+			let res = await fetch(`${server_base}/login`, { method: "POST", headers: h, body: JSON.stringify({user_id: user_name, password}) })
+			if (res.status === 200) {
+				current_uid = await res.text()
+				this.forceUpdate()
+				return
+			} else {
+				throw new Error(await res.text())
+			}
+		}
+
+		create_movie = async (movie) => {
+			let h = new Headers();
+			h.set("Content-Type", "application/json")
+			await fetch(`${server_base}/create_movie`, {method: "POST", headers: h, body: JSON.stringify(movie)})
+			this.request_all_movies()
+		}
+	}
+
+	async request_all_movies() {
+		let json = await (await fetch(`${server_base}/all_movies`)).json();
+		this.got_movies(json);
 	}
 
 	got_movies(movies) {
 		this.state.all_movies = movies.map(x => Object.assign(x, {
-			attendee: x.attendee.split(" "),
 			date: new Date(x.date)
 		}));
 		this.state.featured_movies = this.state.all_movies.slice().sort((a, b) => Math.sign(b.attendee.length - a.attendee.length))
@@ -75,11 +89,13 @@ export class Main extends React.Component {
 		this.setState({
 			movieFormOpen: false
 		})
+		this.request_all_movies()
 	}
 	closeLoginModal = () => {
 		this.setState({
 			loginFormOpen: false
 		})
+		this.request_all_movies()
 	}
 
 	render () {
@@ -87,7 +103,12 @@ export class Main extends React.Component {
 			<div className="topbar">
 				{this.maybeRenderBackButton()}
 				<div className="appname">MovieApp</div>
-				<div className="button" onClick={this.toggleOpenLoginForm}>Login</div>
+				{current_uid === null ? (
+					<div className="button" onClick={this.toggleOpenLoginForm}>Login</div>
+				) : (
+					`Logged in as ${current_uid}`
+				)}
+				&nbsp;
 				<Modal isOpen={this.state.loginFormOpen} onRequestClose={this.closeLoginModal} style={{
 					content: {
 						top: "50%",
@@ -101,7 +122,9 @@ export class Main extends React.Component {
 					<LoginForm closeModal={this.closeLoginModal}/>
 				</Modal>
 				&nbsp;
-				<div className="button" onClick={this.toggleOpenMovieForm}>Create new movie</div>
+				{current_uid !== null ? (
+					<div className="button" onClick={this.toggleOpenMovieForm}>Create new movie</div>
+				) : null}
 				<Modal isOpen={this.state.movieFormOpen} onRequestClose={this.closeModal}  style={{
 					content: {
 						top: "50%",
@@ -118,29 +141,9 @@ export class Main extends React.Component {
 
 			<div className="main-contain">
 				<SearchBar />
-				{this.renderMovieList()}
+				<MovieLists genres={this.state.genres} genre_filter={this.state.genre_filter} featured_movies={this.state.featured_movies} most_recent={this.state.most_recent}/>
 			</div>
 		</div>)
-	}
-
-	renderMovieList() {
-		if (this.state.genre_filter === null) {
-			return [
-				<h2>Featured</h2>,
-				<ListOfMovies data={this.state.featured_movies} />,
-				<h2>Genre</h2>,
-				<div className="horizontal-list">
-					{this.state.genres.map(x => <Genre name={x} onClick={this.filterGenre.bind(this, x)} />)}
-				</div>,
-				<h2>Most recent</h2>,
-				<ListOfMovies data={this.state.most_recent} />,
-			]
-		} else {
-			return [
-				<h2>{this.state.genre_filter} movies:</h2>,
-				<ListOfMovies data={this.state.all_movies.filter(x => x.genre === this.state.genre_filter)} />,
-			]
-		}
 	}
 
 	maybeRenderBackButton() {
@@ -152,9 +155,5 @@ export class Main extends React.Component {
 		return null;
 	}
 
-	filterGenre(name, evt) {
-		this.setState({
-			genre_filter: name
-		})
-	}
+
 }
