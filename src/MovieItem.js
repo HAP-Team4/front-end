@@ -7,6 +7,7 @@ export class MovieItem extends React.Component {
 			<div className="movie" style={{backgroundImage: `url(${this.props.imageUrl})`}}>
 				<div className="buttom">
 					<div className="name">{this.props.name}</div>
+					<div className="watchNumber">{this.props.nbWatching} watching</div>
 				</div>
 			</div>
 		)
