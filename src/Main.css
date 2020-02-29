@@ -19,12 +19,9 @@
 }
 
 .topbar .appname {
+	margin-left: auto;
 	margin-right: auto;
 	font-size: 30px;
-}
-
-.topbar .back-btn {
-	margin-right: 10px;
 }
 
 .main h2 {

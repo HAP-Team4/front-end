@@ -10,6 +10,7 @@
 	justify-content: flex-end;
 	background-position: center;
 	background-size: cover;
+	cursor: pointer;
 }
 
 .movie .buttom {
