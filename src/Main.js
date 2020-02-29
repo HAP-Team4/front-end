@@ -3,7 +3,7 @@ import "./Main.css";
 import { ListOfMovies } from './ListOfMovies';
 import MovieForm from './components/MovieForm';
 import LoginForm from './components/LoginForm';
-
+import SearchBar from './components/SearchBar';
 import { Genre } from './Genre';
 import Modal from 'react-modal';
 
@@ -17,7 +17,7 @@ export class Main extends React.Component {
 			featured_movies: [],
 			most_recent: [],
 			genre_filter: null,
-			genres: []
+			genres: [],
 		};
 		this.got_movies([
 			{
@@ -117,6 +117,7 @@ export class Main extends React.Component {
 			</div>
 
 			<div className="main-contain">
+				<SearchBar />
 				{this.renderMovieList()}
 			</div>
 		</div>)
