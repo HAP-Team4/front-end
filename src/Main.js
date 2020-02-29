@@ -28,8 +28,7 @@ export class Main extends React.Component {
 			most_recent: [],
 			genre_filter: null,
 			genres: [],
-			keyword_filter: false,
-			filtered_movies: [],
+			filtered_movies: null,
 			showing_movie_page: null
 		};
 
@@ -164,14 +163,13 @@ export class Main extends React.Component {
 
 	filterSearchMovies = (filtered) => {
 		this.setState({
-			keyword_filter: true,
 			filtered_movies: filtered
 		});
 	}
-	
+
 	renderMovieList() {
 		if (this.state.showing_movie_page === null) {
-			if (this.state.genre_filter === null && !this.state.keyword_filter) {
+			if (this.state.genre_filter === null && this.state.filtered_movies === null) {
 				return [
 					current_uid !== null ? <MyMovies all_movies={this.state.all_movies}/> : null,
 					<h2>Featured</h2>,
@@ -183,7 +181,7 @@ export class Main extends React.Component {
 					<h2>Most recent</h2>,
 					<ListOfMovies data={this.state.most_recent} />,
 				]
-			} else if (this.state.keyword_filter) {
+			} else if (this.state.filtered_movies !== null) {
 				return [
 					<h2>Search results:</h2>,
 					<ListOfMovies data={this.state.filtered_movies} />,

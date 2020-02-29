@@ -1,41 +1,25 @@
 import React, { Component } from 'react';
-import debounce from 'lodash/debounce'; 
+import debounce from 'lodash/debounce';
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      searchField: '',
-      loading: false
-    }
+		this.debounced = debounce(this.setValue, 300, {trailing: true});
   }
-  setValue = (value) => {
-    this.setState({
-			searchField: value
-    });
-  }
-	handleSearchChange = () => {
-		debounce(this.setValue, 300, {trailing: true});
-    this.props.updateMovies(this.props.data.filter(m => m.title.indexOf(this.state.searchField) >= 0));
-  }
-  
-  render() {
-    const { searchField, loading } = this.state;
-    if (!loading) {
-      return (
-      <div>
-        <input type="text" className="input" placeholder="Search..." value={searchField} onChange={
-          this.handleSearchChange}/>
-      </div>
-      )
-    } else {
-      return (
-        <div className="container movie-form" style={{textAlign: "center"}}>
-          <input type="text" className="input" placeholder="Searching..." />
-          <button className="button" disabled onClick={this.handleSearchSubmit}>Enter</button>
-        </div>
-      )
-    }
 
+  setValue = (value) => {
+    if (value === "") {
+      this.props.updateMovies(null);
+      return
+    }
+    this.props.updateMovies(this.props.data.filter(m => m.title.toLowerCase().indexOf(value.toLowerCase()) >= 0));
+  }
+
+  render() {
+    return (
+      <div>
+        <input type="text" className="input" placeholder="Search..." onChange={evt => this.debounced(evt.target.value)}/>
+      </div>
+    );
   }
 }
 
