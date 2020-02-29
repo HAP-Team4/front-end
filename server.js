@@ -28,6 +28,10 @@ let db = {
 		{
 			id: "4",
 			password: "aaa"
+		},
+		{
+			id: "m@maowtm.org",
+			password: "1"
 		}
 	]
 };
@@ -55,6 +59,17 @@ app.put("/going", async function (req, res) {
 		if (!movie.attendee.includes(uid)) {
 			movie.attendee.push(uid)
 		}
+		res.end()
+	}
+});
+app.delete("/going", async function (req, res) {
+	let movie = db.movies.find(x => x.movie_id.toString() == req.query.movie_id)
+	if (!movie) {
+		res.status(404)
+		res.end()
+	} else {
+		let uid = req.query.user_id
+		movie.attendee = movie.attendee.filter(x => x != uid)
 		res.end()
 	}
 });

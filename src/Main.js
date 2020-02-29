@@ -12,6 +12,7 @@ import { MoviePage } from './MoviePage';
 export const server_base = "http://localhost:8080"
 export let current_uid = null
 export let set_movie_as_going;
+export let set_movie_as_not_going;
 export let login;
 export let create_movie;
 export let open_movie;
@@ -27,6 +28,8 @@ export class Main extends React.Component {
 			most_recent: [],
 			genre_filter: null,
 			genres: [],
+			keyword_filter: false,
+			filtered_movies: [],
 			showing_movie_page: null
 		};
 
@@ -34,6 +37,11 @@ export class Main extends React.Component {
 
 		set_movie_as_going = async (movie_id) => {
 			await fetch(`${server_base}/going?movie_id=${encodeURIComponent(movie_id.toString())}&user_id=${encodeURIComponent(current_uid)}`, {method: "PUT"})
+			this.request_all_movies()
+		}
+
+		set_movie_as_not_going = async (movie_id) => {
+			await fetch(`${server_base}/going?movie_id=${encodeURIComponent(movie_id.toString())}&user_id=${encodeURIComponent(current_uid)}`, {method: "DELETE"})
 			this.request_all_movies()
 		}
 
@@ -147,18 +155,25 @@ export class Main extends React.Component {
 
 			<div className="main-contain">
 				{this.state.showing_movie_page === null ? (
-					<SearchBar />
+					<SearchBar updateMovies={this.filterSearchMovies} data={this.state.all_movies} />
 				) : null}
-				{current_uid !== null && <MyMovies all_movies={this.state.all_movies}/>}
 				{this.renderMovieList()}
 			</div>
 		</div>)
 	}
 
+	filterSearchMovies = (filtered) => {
+		this.setState({
+			keyword_filter: true,
+			filtered_movies: filtered
+		});
+	}
+	
 	renderMovieList() {
 		if (this.state.showing_movie_page === null) {
-			if (this.state.genre_filter === null) {
+			if (this.state.genre_filter === null && !this.state.keyword_filter) {
 				return [
+					current_uid !== null ? <MyMovies all_movies={this.state.all_movies}/> : null,
 					<h2>Featured</h2>,
 					<ListOfMovies data={this.state.featured_movies} />,
 					<h2>Genre</h2>,
@@ -167,6 +182,11 @@ export class Main extends React.Component {
 					</div>,
 					<h2>Most recent</h2>,
 					<ListOfMovies data={this.state.most_recent} />,
+				]
+			} else if (this.state.keyword_filter) {
+				return [
+					<h2>Search results:</h2>,
+					<ListOfMovies data={this.state.filtered_movies} />,
 				]
 			} else {
 				return [

@@ -5,9 +5,6 @@
 @import url('https://fonts.googleapis.com/css?family=Advent+Pro|Barlow+Semi+Condensed|News+Cycle&display=swap');
 .main {
 	background-color: white;
-	min-height: 1000px;
-    height: auto !important;
-	height: 1000px;
 	font-family: 'Barlow Semi Condensed';
 }
 
@@ -46,6 +43,11 @@
 	padding: 5px 10px;
 	border-radius: 2px;
 	cursor: pointer;
+}
+
+.button.whitebtn {
+	background-color: white;
+	color: #5bb899;
 }
 
 .main-contain {
