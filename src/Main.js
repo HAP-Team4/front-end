@@ -1,6 +1,8 @@
 import React from 'react';
 import "./Main.css";
 import { ListOfMovies } from './ListOfMovies';
+import { MovieItem } from './MovieItem';
+import MovieForm from './components/MovieForm';
 
 export class Main extends React.Component {
 	constructor () {
@@ -32,17 +34,19 @@ export class Main extends React.Component {
 		this.handleOpenMovieForm = this.handleOpenMovieForm.bind(this);
 	}
 	render () {
-		return (<div className="main">
-			<div className="topbar">
-				<div className="appname">MovieApp</div>
-				<div className="button" onClick={this.handleOpenMovieForm}>Add new proposal</div>
+		return (
+			<div className="main">
+				<div className="topbar">
+					<div className="appname">MovieApp</div>
+					<div className="button" onClick={this.handleOpenMovieForm}>Add new proposal</div>
+				</div>
+				<h2>Featured</h2>
+				<ListOfMovies data={this.state.featured_movies} />
+				<h2>Genre</h2>
+				<h2>Most recent</h2>
+				<ListOfMovies data={this.state.most_recent} />
 			</div>
-			<h2>Featured</h2>
-			<ListOfMovies data={this.state.featured_movies} />
-			<h2>Genre</h2>
-			<h2>Most recent</h2>
-			<ListOfMovies data={this.state.most_recent} />
-		</div>)
+		)
 	}
 
 	handleOpenMovieForm (evt) {
