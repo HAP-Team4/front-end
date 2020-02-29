@@ -26,6 +26,7 @@ class MovieForm extends Component {
     const { title, venues, date }  = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
+        <button onClick={this.props.closeModal}>close</button>
         <label>
           Movie Title
           <input type="text" value={title} onChange={this.handleChange}/>

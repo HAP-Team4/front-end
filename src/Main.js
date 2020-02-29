@@ -3,6 +3,7 @@ import "./Main.css";
 import { ListOfMovies } from './ListOfMovies';
 import MovieForm from './components/MovieForm';
 import { Genre } from './Genre';
+import Modal from 'react-modal';
 
 export class Main extends React.Component {
 	constructor () {
@@ -36,7 +37,11 @@ export class Main extends React.Component {
 			},
 		]);
 
-		this.handleOpenMovieForm = this.handleOpenMovieForm.bind(this);
+		this.toggleOpenMovieForm = () => {
+			this.setState({
+				movieFormOpen: !this.state.movieFormOpen
+			})
+		}
 	}
 
 	got_movies(movies) {
@@ -60,6 +65,9 @@ export class Main extends React.Component {
 				{this.maybeRenderBackButton()}
 				<div className="appname">MovieApp</div>
 				<div className="button" onClick={this.handleOpenMovieForm}>Add new proposal</div>
+				<Modal isOpen={this.state.movieFormOpen} onRequestClose={this.closeModal}>
+					<MovieForm closeModal={this.closeModal}/>
+				</Modal>
 			</div>
 
 			{this.renderMovieList()}
