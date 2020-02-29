@@ -7,12 +7,15 @@ import SearchBar from './components/SearchBar';
 import { Genre } from './Genre';
 import Modal from 'react-modal';
 import MyMovies from './MyMovies';
+import { MoviePage } from './MoviePage';
 
 export const server_base = "http://localhost:8080"
 export let current_uid = null
 export let set_movie_as_going;
+export let set_movie_as_not_going;
 export let login;
 export let create_movie;
+export let open_movie;
 
 export class Main extends React.Component {
 	constructor () {
@@ -26,13 +29,19 @@ export class Main extends React.Component {
 			genre_filter: null,
 			genres: [],
 			keyword_filter: false,
-			filtered_movies: []
+			filtered_movies: [],
+			showing_movie_page: null
 		};
 
 		this.request_all_movies();
 
 		set_movie_as_going = async (movie_id) => {
 			await fetch(`${server_base}/going?movie_id=${encodeURIComponent(movie_id.toString())}&user_id=${encodeURIComponent(current_uid)}`, {method: "PUT"})
+			this.request_all_movies()
+		}
+
+		set_movie_as_not_going = async (movie_id) => {
+			await fetch(`${server_base}/going?movie_id=${encodeURIComponent(movie_id.toString())}&user_id=${encodeURIComponent(current_uid)}`, {method: "DELETE"})
 			this.request_all_movies()
 		}
 
@@ -55,6 +64,8 @@ export class Main extends React.Component {
 			await fetch(`${server_base}/create_movie`, {method: "POST", headers: h, body: JSON.stringify(movie)})
 			this.request_all_movies()
 		}
+
+		open_movie = this.showMoviePage.bind(this)
 	}
 
 	async request_all_movies() {
@@ -143,8 +154,9 @@ export class Main extends React.Component {
 			</div>
 
 			<div className="main-contain">
-				<SearchBar updateMovies={this.filterSearchMovies} data={this.state.all_movies} />
-				{current_uid !== null && <MyMovies all_movies={this.state.all_movies}/>}
+				{this.state.showing_movie_page === null ? (
+					<SearchBar updateMovies={this.filterSearchMovies} data={this.state.all_movies} />
+				) : null}
 				{this.renderMovieList()}
 			</div>
 		</div>)
@@ -158,37 +170,56 @@ export class Main extends React.Component {
 	}
 	
 	renderMovieList() {
-		if (this.state.genre_filter === null && !this.state.keyword_filter) {
+		if (this.state.showing_movie_page === null) {
+			if (this.state.genre_filter === null && !this.state.keyword_filter) {
+				return [
+					current_uid !== null ? <MyMovies all_movies={this.state.all_movies}/> : null,
+					<h2>Featured</h2>,
+					<ListOfMovies data={this.state.featured_movies} />,
+					<h2>Genre</h2>,
+					<div className="horizontal-list">
+						{this.state.genres.map(x => <Genre name={x} onClick={this.filterGenre.bind(this, x)} />)}
+					</div>,
+					<h2>Most recent</h2>,
+					<ListOfMovies data={this.state.most_recent} />,
+				]
+			} else if (this.state.keyword_filter) {
+				return [
+					<h2>Search results:</h2>,
+					<ListOfMovies data={this.state.filtered_movies} />,
+				]
+			} else {
+				return [
+					<h2>{this.state.genre_filter} movies:</h2>,
+					<ListOfMovies data={this.state.all_movies.filter(x => x.genre === this.state.genre_filter)} />,
+				]
+			}
+		} else {
+			let movie = this.state.all_movies.find(x => x.movie_id === this.state.showing_movie_page);
 			return [
-				<h2>Featured</h2>,
-				<ListOfMovies data={this.state.featured_movies} />,
-				<h2>Genre</h2>,
-				<div className="horizontal-list">
-					{this.state.genres.map(x => <Genre name={x} onClick={this.filterGenre.bind(this, x)} />)}
-				</div>,
-				<h2>Most recent</h2>,
-				<ListOfMovies data={this.state.most_recent} />,
-			]
-		} else if (this.state.genre_filter) {
-			return [
-				<h2>{this.state.genre_filter} movies:</h2>,
-				<ListOfMovies data={this.state.all_movies.filter(x => x.genre === this.state.genre_filter)} />,
-			]
-		} else if (this.state.keyword_filter) {
-			return [
-				<h2>Search results:</h2>,
-				<ListOfMovies data={this.state.filtered_movies} />,
+				<MoviePage movie={movie} />
 			]
 		}
 	}
 
 	maybeRenderBackButton() {
+		if (this.state.showing_movie_page !== null) {
+			return (
+				<div className="button back-btn" onClick={this.showMoviePage.bind(this, null)}>Back</div>
+			)
+		}
 		if (this.state.genre_filter !== null) {
 			return (
 				<div className="button back-btn" onClick={this.filterGenre.bind(this, null)}>Back</div>
 			)
 		}
 		return null;
+	}
+
+	showMoviePage(movie_id) {
+		this.setState({
+			showing_movie_page: movie_id
+		})
 	}
 
 	filterGenre(name, evt) {

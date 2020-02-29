@@ -23,14 +23,14 @@ class SearchBar extends Component {
     if (!loading) {
       return (
       <div>
-        <input type="text" style={{color:"white"}} className="input" placeholder="Search..." value={searchField} onChange={
+        <input type="text" className="input" placeholder="Search..." value={searchField} onChange={
           this.handleSearchChange}/>
       </div>
       )
     } else {
       return (
         <div className="container movie-form" style={{textAlign: "center"}}>
-          <input type="text" style={{color:"white"}} className="input" placeholder="Searching..." />
+          <input type="text" className="input" placeholder="Searching..." />
           <button className="button" disabled onClick={this.handleSearchSubmit}>Enter</button>
         </div>
       )

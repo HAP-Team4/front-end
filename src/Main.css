@@ -1,8 +1,5 @@
 .main {
-	background-color: black;
-	min-height: 1000px;
-    height: auto !important;
-    height: 1000px;
+	background-color: white;
 }
 
 .topbar {
@@ -19,17 +16,13 @@
 }
 
 .topbar .appname {
+	margin-left: auto;
 	margin-right: auto;
 	font-size: 30px;
 }
 
-.topbar .back-btn {
-	margin-right: 10px;
-}
-
 .main h2 {
 	font-weight: bold;
-	color: white;
 	padding: 0;
 	margin: 5px;
 	font-size: 30px;
@@ -43,6 +36,11 @@
 	padding: 5px 10px;
 	border-radius: 2px;
 	cursor: pointer;
+}
+
+.button.whitebtn {
+	background-color: white;
+	color: #5bb899;
 }
 
 .main-contain {

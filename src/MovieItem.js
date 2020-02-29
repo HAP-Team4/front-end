@@ -1,12 +1,13 @@
 import React from "react";
 import "./MovieItem.css";
 
-import { current_uid, set_movie_as_going } from "./Main";
+import { open_movie } from "./Main";
+import { GoBtn } from "./GoBtn";
 
 export class MovieItem extends React.Component {
 	render() {
 		return (
-			<div className="movie" style={{backgroundImage: `url(https://cataas.com/cat/says/${encodeURIComponent(this.props.data.title)})`}}>
+			<div className="movie" onClick={() => open_movie(this.props.data.movie_id)} style={{backgroundImage: `url(https://cataas.com/cat/says/${encodeURIComponent(this.props.data.title)})`}}>
 				<div className="buttom">
 					<div className="name">{this.props.data.title}</div>
 					<div className="watchNumber">{this.props.data.attendee.length} going</div>
@@ -18,20 +19,10 @@ export class MovieItem extends React.Component {
 						<div>Date: {this.props.data.date.toDateString()}</div>
 					</div>
 					<div>
-						{current_uid !== null ? (this.props.data.attendee.includes(current_uid)) ? (
-							<div>Going!</div>
-						) : (
-							<div className="button" onClick={this.handleGo.bind(this, this.props.data.movie_id)}>Go!</div>
-						) : (
-							<div>Login?</div>
-						)}
+						<GoBtn movie={this.props.data} />
 					</div>
 				</div>
 			</div>
 		)
-	}
-
-	handleGo(movie_id) {
-		set_movie_as_going(movie_id)
 	}
 }
