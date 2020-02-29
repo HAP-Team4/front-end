@@ -127,7 +127,7 @@ export class Main extends React.Component {
 						<div className="button" onClick={this.toggleOpenLoginForm}>Login</div>
 					) : (
 						<div>
-							<p>`Logged in as ${current_uid}`</p>
+							Logged in as {current_uid}<br />
 							<div className="button-red" onClick={this.logout}>Logout</div>
 						</div>
 					)}
