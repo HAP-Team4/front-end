@@ -45,6 +45,7 @@ export class Main extends React.Component {
 				<h2>Genre</h2>
 				<h2>Most recent</h2>
 				<ListOfMovies data={this.state.most_recent} />
+				<MovieForm/>
 			</div>
 		)
 	}

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import Calendar from 'react-calendar'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 class MovieForm extends Component {
   constructor(props) {
     super(props);
@@ -7,7 +9,6 @@ class MovieForm extends Component {
       title: '',
       venues: 'Vue Picadilly',
       date: '',
-      isCalendarOpen: false
     }
   }
   handleChange = (e) => {
@@ -16,18 +17,13 @@ class MovieForm extends Component {
   handleCalendarChange = (date) => {
     this.setState({ date })
   }
-  toggleOpen = () => {
-    this.setState({ 
-      isCalendarOpen: !this.state.isCalendarOpen
-    })
-  }
   handleSubmit = (e) => {
     // add post url
     alert('A name was submitted: ' + this.state.date);
     e.preventDefault();
   }
   render() {
-    const {title, venues, date, isCalendarOpen}  = this.state;
+    const { title, venues, date }  = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
@@ -44,12 +40,12 @@ class MovieForm extends Component {
         </label>
         <label>
           Screening Date
-          <button onClick={this.toggleOpen}>
-            {isCalendarOpen && <Calendar
-              onChange={this.handleCalendarChange}
-              value={date}
-            />}
-          </button>
+          <div>
+              <DatePicker
+                selected={date}
+                onChange={this.handleCalendarChange}
+              />
+          </div>
         </label>
         <input type="submit" value="Submit" />
       </form>
