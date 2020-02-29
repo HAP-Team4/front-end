@@ -10,7 +10,7 @@ body {
   flex-wrap: nowrap;
   overflow-x: auto;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .horizontal-list > * {

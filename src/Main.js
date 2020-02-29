@@ -19,21 +19,24 @@ export class Main extends React.Component {
 		this.got_movies([
 			{
 				title: "Hello world",
-				attendee: [0,1,2,3,4,5,6],
+				attendee: "0 1 2 3 4 5 6 7",
 				date: "2020-01-01T00:00:00Z",
-				genre: "Horror"
+				genre: "Horror",
+				location: "Some Cinema, London"
 			},
 			{
 				title: "Hello!",
-				attendee: [0,1,2,3],
+				attendee: "0 1 2 3",
 				date: "2020-01-02T00:00:00Z",
-				genre: "Comedy"
+				genre: "Comedy",
+				location: "Cinema 2, London"
 			},
 			{
 				title: "world!",
-				attendee: [0,1,2,3,4],
+				attendee: "0 1 2 3 4 5 6",
 				date: "2020-01-03T00:00:00Z",
-				genre: "Romance"
+				genre: "Romance",
+				location: "University College London, London"
 			},
 		]);
 
@@ -45,7 +48,10 @@ export class Main extends React.Component {
 	}
 
 	got_movies(movies) {
-		this.state.all_movies = movies;
+		this.state.all_movies = movies.map(x => Object.assign(x, {
+			attendee: x.attendee.split(" "),
+			date: new Date(x.date)
+		}));
 		this.state.featured_movies = this.state.all_movies.slice().sort((a, b) => Math.sign(b.attendee.length - a.attendee.length))
 		this.state.most_recent = this.state.all_movies.slice().sort((a, b) => Math.sign(new Date(b.date) - new Date(a.date)));
 		this.state.genres = this.state.all_movies.map(x => x.genre).reduce((xs, x) => {
@@ -75,7 +81,9 @@ export class Main extends React.Component {
 				</Modal>
 			</div>
 
-			{this.renderMovieList()}
+			<div className="main-contain">
+				{this.renderMovieList()}
+			</div>
 		</div>)
 	}
 

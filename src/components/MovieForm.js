@@ -26,18 +26,20 @@ class MovieForm extends Component {
   render() {
     const { title, venues, datetime }  = this.state;
     return (
-      <div className="container">
+      <div className="container movie-form">
         <form onSubmit={this.handleSubmit}>
-          <button onClick={this.props.closeModal}>close</button>
+          <div className="button" onClick={this.props.closeModal}>close</div>
           <div className="row">
             <label>
-              Movie Title
+              Movie Title:
+              <br></br>
               <input type="text" value={title} onChange={this.handleChange}/>
             </label>
           </div>
           <div className="row">
             <label>
-              Venue
+              Venue:&nbsp;
+              <br></br>
               <select>
                 <option>
                   {venues}
@@ -47,7 +49,7 @@ class MovieForm extends Component {
           </div>
           <div className="row">
           <label>
-            Screening Date
+            Screening Date:
             <div>
                 <DatePicker
                   selected={datetime}
@@ -58,7 +60,9 @@ class MovieForm extends Component {
             </div>
           </label>
           </div>
-          <input type="submit" value="Submit" />
+          <div className="submit-contain">
+            <div className="button">submit</div>
+          </div>
         </form>
       </div>
     )

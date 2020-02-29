@@ -12,8 +12,8 @@ export class MovieItem extends React.Component {
 				<div className="expansion">
 					<div className="info">
 						<div>{this.props.data.genre}</div>
-						<div>Venue: &hellip;</div>
-						<div>Date: &hellip;</div>
+						<div>Venue: {this.props.data.location}</div>
+						<div>Date: {this.props.data.date.toDateString()}</div>
 					</div>
 					<div>
 						<div className="button">Go!</div>
