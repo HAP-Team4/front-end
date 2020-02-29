@@ -7,7 +7,7 @@ import SearchBar from './components/SearchBar';
 import Modal from 'react-modal';
 import MovieLists from './MovieLists';
 
-export const server_base = "http://172.17.0.2:8080"
+export const server_base = "http://localhost:8080"
 export let current_uid = null
 export let set_movie_as_going;
 export let login;
