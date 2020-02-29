@@ -76,8 +76,6 @@ export class Main extends React.Component {
 			</div>
 
 			{this.renderMovieList()}
-
-			<MovieForm />
 		</div>)
 	}
 
