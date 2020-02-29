@@ -22,13 +22,13 @@
 }
 
 .topbar .left {
-	width: 300px;
+	min-width: 300px;
 	margin-right: auto;
 	justify-content: flex-start;
 	align-items: center;
 }
 .topbar .right {
-	width: 300px;
+	min-width: 400px;
 	margin-left: auto;
 	display: flex;
 	flex-direction: row;
