@@ -12,7 +12,7 @@ class MovieForm extends Component {
     }
   }
   handleChange = (e) => {
-    this.setState({value: e.target.value});
+    this.setState({title: e.target.value});
   }
   handleCalendarChange = (datetime) => {
     this.setState({ datetime })
