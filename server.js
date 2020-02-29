@@ -6,7 +6,10 @@ let db = {
 		{
 			movie_id: 1,
 			title: "Hello world",
-			attendee: [],
+			attendee: [
+				"m@maowtm.org",
+				"ziyun_poh@hotmail.com"
+			],
 			date: "2020-03-01T00:00:00Z",
 			genre: "Horror",
 			location: "Vue Picadilly, London"
@@ -50,7 +53,7 @@ let db = {
 			password: "1"
 		},
 		{
-			id: "Ziyun",
+			id: "ziyun_poh@hotmail.com",
 			password: "xxx"
 		}
 	]
