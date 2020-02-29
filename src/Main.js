@@ -4,8 +4,8 @@ import { ListOfMovies } from './ListOfMovies';
 import MovieForm from './components/MovieForm';
 import LoginForm from './components/LoginForm';
 import SearchBar from './components/SearchBar';
-import { Genre } from './Genre';
 import Modal from 'react-modal';
+import MovieLists from './MovieLists';
 
 export class Main extends React.Component {
 	constructor () {
@@ -118,29 +118,9 @@ export class Main extends React.Component {
 
 			<div className="main-contain">
 				<SearchBar />
-				{this.renderMovieList()}
+				<MovieLists genres={this.state.genres} genre_filter={this.state.genre_filter} featured_movies={this.state.featured_movies} most_recent={this.state.most_recent}/>
 			</div>
 		</div>)
-	}
-
-	renderMovieList() {
-		if (this.state.genre_filter === null) {
-			return [
-				<h2>Featured</h2>,
-				<ListOfMovies data={this.state.featured_movies} />,
-				<h2>Genre</h2>,
-				<div className="horizontal-list">
-					{this.state.genres.map(x => <Genre name={x} onClick={this.filterGenre.bind(this, x)} />)}
-				</div>,
-				<h2>Most recent</h2>,
-				<ListOfMovies data={this.state.most_recent} />,
-			]
-		} else {
-			return [
-				<h2>{this.state.genre_filter} movies:</h2>,
-				<ListOfMovies data={this.state.all_movies.filter(x => x.genre === this.state.genre_filter)} />,
-			]
-		}
 	}
 
 	maybeRenderBackButton() {
@@ -152,9 +132,5 @@ export class Main extends React.Component {
 		return null;
 	}
 
-	filterGenre(name, evt) {
-		this.setState({
-			genre_filter: name
-		})
-	}
+
 }
