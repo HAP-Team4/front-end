@@ -114,42 +114,46 @@ export class Main extends React.Component {
 	render () {
 		return (<div className="main" >
 			<div className="topbar">
-				{this.maybeRenderBackButton()}
+				<div className="left">
+					{this.maybeRenderBackButton()}
+				</div>
 				<div className="appname">Cinemate</div>
-				{current_uid === null ? (
-					<div className="button" onClick={this.toggleOpenLoginForm}>Login</div>
-				) : (
-					`Logged in as ${current_uid}`
-				)}
-				&nbsp;
-				<Modal isOpen={this.state.loginFormOpen} onRequestClose={this.closeLoginModal} style={{
-					content: {
-						top: "50%",
-						left: "50%",
-						width: "500px",
-						bottom: "auto",
-						marginRight: "-50%",
-						transform: "translate(-50%,-50%)"
-					}
-				}}>
-					<LoginForm closeModal={this.closeLoginModal}/>
-				</Modal>
-				&nbsp;
-				{current_uid !== null ? (
-					<div className="button" onClick={this.toggleOpenMovieForm}>Create new movie</div>
-				) : null}
-				<Modal isOpen={this.state.movieFormOpen} onRequestClose={this.closeModal}  style={{
-					content: {
-						top: "50%",
-						left: "50%",
-						width: "500px",
-						height: "500px",
-						marginRight: "-50%",
-						transform: "translate(-50%,-50%)"
-					}
-				}}>
-					<MovieForm closeModal={this.closeModal}/>
-				</Modal>
+				<div className="right">
+					{current_uid === null ? (
+						<div className="button" onClick={this.toggleOpenLoginForm}>Login</div>
+					) : (
+						`Logged in as ${current_uid}`
+					)}
+					&nbsp;
+					<Modal isOpen={this.state.loginFormOpen} onRequestClose={this.closeLoginModal} style={{
+						content: {
+							top: "50%",
+							left: "50%",
+							width: "500px",
+							bottom: "auto",
+							marginRight: "-50%",
+							transform: "translate(-50%,-50%)"
+						}
+					}}>
+						<LoginForm closeModal={this.closeLoginModal}/>
+					</Modal>
+					&nbsp;
+					{current_uid !== null ? (
+						<div className="button" onClick={this.toggleOpenMovieForm}>Create new movie</div>
+					) : null}
+					<Modal isOpen={this.state.movieFormOpen} onRequestClose={this.closeModal}  style={{
+						content: {
+							top: "50%",
+							left: "50%",
+							width: "500px",
+							height: "500px",
+							marginRight: "-50%",
+							transform: "translate(-50%,-50%)"
+						}
+					}}>
+						<MovieForm closeModal={this.closeModal}/>
+					</Modal>
+				</div>
 			</div>
 
 			<div className="main-contain">
