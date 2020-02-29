@@ -1,5 +1,5 @@
 .main {
-	background-color: black;
+	background-color: white;
 	min-height: 1000px;
     height: auto !important;
     height: 1000px;
@@ -26,7 +26,6 @@
 
 .main h2 {
 	font-weight: bold;
-	color: white;
 	padding: 0;
 	margin: 5px;
 	font-size: 30px;
