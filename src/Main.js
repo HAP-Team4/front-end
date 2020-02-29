@@ -101,9 +101,6 @@ export class Main extends React.Component {
 		}
 	}
 
-	handleOpenMovieForm (evt) {
-	}
-
 	maybeRenderBackButton() {
 		if (this.state.genre_filter !== null) {
 			return (

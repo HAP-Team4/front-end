@@ -8,22 +8,22 @@ class MovieForm extends Component {
     this.state = {
       title: '',
       venues: 'Vue Picadilly',
-      date: '',
+      datetime: '',
     }
   }
   handleChange = (e) => {
     this.setState({value: e.target.value});
   }
-  handleCalendarChange = (date) => {
-    this.setState({ date })
+  handleCalendarChange = (datetime) => {
+    this.setState({ datetime })
   }
   handleSubmit = (e) => {
     // add post url
-    alert('A name was submitted: ' + this.state.date);
+    alert('A name was submitted: ' + this.state.datetime);
     e.preventDefault();
   }
   render() {
-    const { title, venues, date }  = this.state;
+    const { title, venues, datetime }  = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <button onClick={this.props.closeModal}>close</button>
@@ -43,8 +43,10 @@ class MovieForm extends Component {
           Screening Date
           <div>
               <DatePicker
-                selected={date}
+                selected={datetime}
                 onChange={this.handleCalendarChange}
+                showTimeSelect
+                dateFormat="Pp"
               />
           </div>
         </label>
