@@ -7,7 +7,7 @@ let db = {
 			movie_id: 1,
 			title: "Hello world",
 			attendee: [],
-			date: "2020-01-01T00:00:00Z",
+			date: "2020-03-01T00:00:00Z",
 			genre: "Horror",
 			location: "Vue Picadilly, London"
 		},
@@ -15,7 +15,7 @@ let db = {
 			movie_id: 2,
 			title: "Goodbye world",
 			attendee: [],
-			date: "2020-01-02T00:00:00Z",
+			date: "2020-03-02T00:00:00Z",
 			genre: "Comedy",
 			location: "ODEAN Picadilly, London"
 		},
@@ -23,7 +23,7 @@ let db = {
 			movie_id: 3,
 			title: "This world",
 			attendee: [],
-			date: "2020-01-03T00:00:00Z",
+			date: "2020-03-03T00:00:00Z",
 			genre: "Romance",
 			location: "ODEAN Tottenham Court Road, London"
 		}

@@ -77,7 +77,7 @@ export class Main extends React.Component {
 			date: new Date(x.date)
 		}));
 		this.state.featured_movies = this.state.all_movies.slice().sort((a, b) => Math.sign(b.attendee.length - a.attendee.length))
-		this.state.most_recent = this.state.all_movies.slice().sort((a, b) => Math.sign(new Date(b.date) - new Date(a.date)));
+		this.state.most_recent = this.state.all_movies.slice().sort((a, b) => Math.sign(new Date(a.date) - new Date(b.date)));
 		this.state.genres = this.state.all_movies.map(x => x.genre).reduce((xs, x) => {
 			if (xs.includes(x)) {
 				return xs;
