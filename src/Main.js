@@ -105,10 +105,10 @@ export class Main extends React.Component {
 	}
 
 	render () {
-		return (<div className="main">
+		return (<div className="main" >
 			<div className="topbar">
 				{this.maybeRenderBackButton()}
-				<div className="appname">MovieApp</div>
+				<div className="appname">Cinemate</div>
 				{current_uid === null ? (
 					<div className="button" onClick={this.toggleOpenLoginForm}>Login</div>
 				) : (

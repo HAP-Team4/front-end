@@ -1,8 +1,14 @@
+/* @import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css?family=Fredoka+One&display=swap'); */
+@import url('https://fonts.googleapis.com/css?family=Advent+Pro|Barlow+Semi+Condensed|News+Cycle&display=swap');
 .main {
 	background-color: white;
 	min-height: 1000px;
     height: auto !important;
-    height: 1000px;
+	height: 1000px;
+	font-family: 'Barlow Semi Condensed';
 }
 
 .topbar {
@@ -19,9 +25,10 @@
 }
 
 .topbar .appname {
-	margin-left: auto;
+	font-weight: bold;
+	margin-left: 44%;
 	margin-right: auto;
-	font-size: 30px;
+	font-size: 45px;
 }
 
 .main h2 {
