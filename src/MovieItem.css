@@ -26,3 +26,26 @@
 	font-weight: bold;
 	margin-right: auto;
 }
+
+.movie .expansion {
+	background-color: black;
+	padding: 12px;
+	box-sizing: border-box;
+	height: 0;
+	overflow: hidden;
+	transition: height 300ms;
+	display: none;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: start;
+	align-items: center;
+}
+
+.movie:hover .expansion {
+	height: auto;
+	display: flex;
+}
+
+.movie .expansion .info {
+	margin-right: auto;
+}

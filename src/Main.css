@@ -19,6 +19,10 @@
 	font-size: 30px;
 }
 
+.topbar .back-btn {
+	margin-right: 10px;
+}
+
 .main h2 {
 	font-weight: normal;
 	padding: 0;

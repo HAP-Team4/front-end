@@ -1,0 +1,10 @@
+.genre {
+	background-color: black;
+	padding: 10px 15px;
+	text-align: center;
+	box-sizing: border-box;
+	width: 300px;
+	font-size: 22px;
+	color: white;
+	cursor: pointer;
+}
