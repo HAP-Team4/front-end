@@ -9,6 +9,7 @@ class LoginForm extends Component {
     this.state = {
       username: '',
       password: '',
+      loading: false
     }
   }
   handleChange = (e) => {
@@ -18,16 +19,22 @@ class LoginForm extends Component {
     this.setState({ password: e.target.value })
   }
   handleSubmit = (e) => {
-    // add post url
-    alert('A name was submitted: ' + this.state.username + this.state.password);
-    e.preventDefault();
+    this.setState({
+      loading: true
+    })
   }
   render() {
     const { username }  = this.state;
+    if (this.state.loading) {
+      return (
+        <div className="container form-model" style={{textAlign: "center"}}>
+          Loading
+        </div>
+      )
+    }
     return (
-      <div className="container">
-        <form onSubmit={this.handleSubmit}>
-        <button onClick={this.props.closeModal}>close</button>
+      <div className="container form-model">
+        <form>
           <div className="row">
             <label>
               Username
@@ -40,7 +47,10 @@ class LoginForm extends Component {
               <input type="password" onChange={this.handlePassword}/>
             </label>
           </div>
-          <input type="submit" value="Submit" />
+          <div className="submit-contain">
+            <div className="button" onClick={this.handleSubmit}>submit</div>
+            <div className="button" onClick={this.props.closeModal}>cancel</div>
+          </div>
         </form>
       </div>
     )

@@ -28,7 +28,7 @@ class MovieForm extends Component {
     const { title, venues, datetime }  = this.state;
     if (!this.state.submitting) {
       return (
-        <div className="container movie-form">
+        <div className="container movie-form form-model">
           <form>
             <div className="row">
               <label>

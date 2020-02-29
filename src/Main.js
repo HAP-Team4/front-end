@@ -88,9 +88,19 @@ export class Main extends React.Component {
 				{this.maybeRenderBackButton()}
 				<div className="appname">MovieApp</div>
 				<div className="button" onClick={this.toggleOpenLoginForm}>Login</div>
-				<Modal isOpen={this.state.loginFormOpen} onRequestClose={this.closeLoginModal}>
+				<Modal isOpen={this.state.loginFormOpen} onRequestClose={this.closeLoginModal} style={{
+					content: {
+						top: "50%",
+						left: "50%",
+						width: "500px",
+						bottom: "auto",
+						marginRight: "-50%",
+						transform: "translate(-50%,-50%)"
+					}
+				}}>
 					<LoginForm closeModal={this.closeLoginModal}/>
 				</Modal>
+				&nbsp;
 				<div className="button" onClick={this.toggleOpenMovieForm}>Create new movie</div>
 				<Modal isOpen={this.state.movieFormOpen} onRequestClose={this.closeModal}  style={{
 					content: {

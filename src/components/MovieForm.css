@@ -7,22 +7,22 @@ input {
   line-height: 1.5;
 }
 
-.movie-form {
+.form-model form {
   padding: 20px;
   font-size: 20px;
 }
 
-.movie-form form {
+.form-model form form {
   display: block;
   margin: 0 auto;
   max-width: 700px;
 }
 
-.movie-form .submit-contain {
+.form-model form .submit-contain {
   text-align: center;
   margin-top: 10px;
 }
 
-.movie-form .submit-contain > * {
+.form-model form .submit-contain > * {
   margin-right: 10px;
 }
