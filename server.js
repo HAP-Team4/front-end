@@ -8,7 +8,9 @@ let db = {
 			title: "Hello world",
 			attendee: [
 				"m@maowtm.org",
-				"ziyun_poh@hotmail.com"
+				"ziyun_poh@hotmail.com",
+				"daryllimyt@gmail.com",
+				"904nehar@gmail.com"
 			],
 			date: "2020-03-01T00:00:00Z",
 			genre: "Horror",
@@ -33,20 +35,8 @@ let db = {
 	],
 	users: [
 		{
-			id: "1",
+			id: "jo",
 			password: "xxx"
-		},
-		{
-			id: "2",
-			password: "yyy"
-		},
-		{
-			id: "3",
-			password: "zzz"
-		},
-		{
-			id: "4",
-			password: "aaa"
 		},
 		{
 			id: "m@maowtm.org",
@@ -54,6 +44,14 @@ let db = {
 		},
 		{
 			id: "ziyun_poh@hotmail.com",
+			password: "xxx"
+		},
+		{
+			id: "daryllimyt@gmail.com",
+			password: "xxx"
+		},
+		{
+			id: "904nehar@gmail.com",
 			password: "xxx"
 		}
 	]
