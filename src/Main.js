@@ -110,6 +110,10 @@ export class Main extends React.Component {
 		})
 		this.request_all_movies()
 	}
+	logout = () => {
+		current_uid = null;
+		this.forceUpdate();
+	}
 
 	render () {
 		return (<div className="main" >
@@ -122,7 +126,10 @@ export class Main extends React.Component {
 					{current_uid === null ? (
 						<div className="button" onClick={this.toggleOpenLoginForm}>Login</div>
 					) : (
-						`Logged in as ${current_uid}`
+						<div>
+							<p>`Logged in as ${current_uid}`</p>
+							<div className="button-red" onClick={this.logout}>Logout</div>
+						</div>
 					)}
 					&nbsp;
 					<Modal isOpen={this.state.loginFormOpen} onRequestClose={this.closeLoginModal} style={{
