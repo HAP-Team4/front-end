@@ -41,6 +41,11 @@
 	cursor: pointer;
 }
 
+.button.whitebtn {
+	background-color: white;
+	color: #5bb899;
+}
+
 .main-contain {
 	max-width: 1000px;
 	min-height: 100%;

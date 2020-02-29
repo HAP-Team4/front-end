@@ -155,7 +155,6 @@ export class Main extends React.Component {
 				{this.state.showing_movie_page === null ? (
 					<SearchBar />
 				) : null}
-				{current_uid !== null && <MyMovies all_movies={this.state.all_movies}/>}
 				{this.renderMovieList()}
 			</div>
 		</div>)
@@ -165,6 +164,7 @@ export class Main extends React.Component {
 		if (this.state.showing_movie_page === null) {
 			if (this.state.genre_filter === null) {
 				return [
+					current_uid !== null ? <MyMovies all_movies={this.state.all_movies}/> : null,
 					<h2>Featured</h2>,
 					<ListOfMovies data={this.state.featured_movies} />,
 					<h2>Genre</h2>,

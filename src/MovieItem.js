@@ -1,7 +1,8 @@
 import React from "react";
 import "./MovieItem.css";
 
-import { current_uid, set_movie_as_going, open_movie } from "./Main";
+import { open_movie } from "./Main";
+import { GoBtn } from "./GoBtn";
 
 export class MovieItem extends React.Component {
 	render() {
@@ -18,20 +19,10 @@ export class MovieItem extends React.Component {
 						<div>Date: {this.props.data.date.toDateString()}</div>
 					</div>
 					<div>
-						{current_uid !== null ? (this.props.data.attendee.includes(current_uid)) ? (
-							<div>Going!</div>
-						) : (
-							<div className="button" onClick={this.handleGo.bind(this, this.props.data.movie_id)}>Go!</div>
-						) : (
-							<div>Login?</div>
-						)}
+						<GoBtn movie={this.props.data} />
 					</div>
 				</div>
 			</div>
 		)
-	}
-
-	handleGo(movie_id) {
-		set_movie_as_going(movie_id)
 	}
 }
