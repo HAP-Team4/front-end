@@ -4,10 +4,10 @@ import "./MovieItem.css";
 export class MovieItem extends React.Component {
 	render() {
 		return (
-			<div className="movie" style={{backgroundImage: `url(${this.props.imageUrl})`}}>
+			<div className="movie" style={{backgroundImage: `url(https://cataas.com/cat/says/${encodeURIComponent(this.props.data.title)})`}}>
 				<div className="buttom">
-					<div className="name">{this.props.name}</div>
-					<div className="watchNumber">{this.props.nbWatching} watching</div>
+					<div className="name">{this.props.data.title}</div>
+					<div className="watchNumber">{this.props.data.attendee.length} watching</div>
 				</div>
 			</div>
 		)
