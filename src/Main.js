@@ -12,6 +12,7 @@ import { MoviePage } from './MoviePage';
 export const server_base = "http://localhost:8080"
 export let current_uid = null
 export let set_movie_as_going;
+export let set_movie_as_not_going;
 export let login;
 export let create_movie;
 export let open_movie;
