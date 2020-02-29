@@ -143,7 +143,7 @@ export class Main extends React.Component {
 						top: "50%",
 						left: "50%",
 						width: "500px",
-						bottom: "auto",
+						height: "500px",
 						marginRight: "-50%",
 						transform: "translate(-50%,-50%)"
 					}
