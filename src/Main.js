@@ -58,13 +58,18 @@ export class Main extends React.Component {
 		}, [])
 		this.forceUpdate()
 	}
+	closeModal = () => {
+		this.setState({
+			movieFormOpen: false
+		})
+	}
 
 	render () {
 		return (<div className="main">
 			<div className="topbar">
 				{this.maybeRenderBackButton()}
 				<div className="appname">MovieApp</div>
-				<div className="button" onClick={this.handleOpenMovieForm}>Add new proposal</div>
+				<div className="button" onClick={this.toggleOpenMovieForm}>Add new proposal</div>
 				<Modal isOpen={this.state.movieFormOpen} onRequestClose={this.closeModal}>
 					<MovieForm closeModal={this.closeModal}/>
 				</Modal>
