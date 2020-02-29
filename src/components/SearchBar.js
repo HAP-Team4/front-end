@@ -11,7 +11,6 @@ class SearchBar extends Component {
   }
 
   render() {
-    const { searchField, loading } = this.state;
     return (
       <div>
         <input type="text" className="input" placeholder="Search..." onChange={evt => this.debounced(evt.target.value)}/>
