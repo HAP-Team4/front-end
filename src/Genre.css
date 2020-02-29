@@ -10,6 +10,7 @@
 	justify-content: flex-end;
 	background-position: center;
 	background-size: cover;
+	cursor: pointer;
 }
 
 .genre .buttom {
@@ -25,18 +26,4 @@
 	font-size: 26px;
 	font-weight: bold;
 	margin-right: auto;
-}
-
-.genre .expansion {
-	background-color: black;
-	padding: 12px;
-	box-sizing: border-box;
-	height: 0;
-	overflow: hidden;
-	transition: height 300ms;
-	display: none;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: start;
-	align-items: center;
 }

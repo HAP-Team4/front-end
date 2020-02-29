@@ -22,7 +22,6 @@ export class Genre extends React.Component {
 				<div className="buttom">
 					<div className="name">{this.props.name}</div>
 				</div>
-				<div className="expansion"></div>
 			</div>
 		)
 	}

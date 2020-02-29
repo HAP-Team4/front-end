@@ -37,6 +37,11 @@ export class Main extends React.Component {
 			this.request_all_movies()
 		}
 
+		set_movie_as_not_going = async (movie_id) => {
+			await fetch(`${server_base}/going?movie_id=${encodeURIComponent(movie_id.toString())}&user_id=${encodeURIComponent(current_uid)}`, {method: "DELETE"})
+			this.request_all_movies()
+		}
+
 		login = async (user_name, password) => {
 			let h = new Headers();
 			h.set("Content-Type", "application/json")

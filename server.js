@@ -58,6 +58,17 @@ app.put("/going", async function (req, res) {
 		res.end()
 	}
 });
+app.delete("/going", async function (req, res) {
+	let movie = db.movies.find(x => x.movie_id.toString() == req.query.movie_id)
+	if (!movie) {
+		res.status(404)
+		res.end()
+	} else {
+		let uid = req.query.user_id
+		movie.attendee = movie.attendee.filter(x => x != uid)
+		res.end()
+	}
+});
 app.post("/login", bodyParser.json(), async function (req, res) {
 	let {user_id, password} = req.body;
 	let user = db.users.find(x => x.id === user_id && x.password === password);
