@@ -9,7 +9,23 @@ let db = {
 			attendee: [],
 			date: "2020-01-01T00:00:00Z",
 			genre: "Horror",
-			location: "Some Cinema, London"
+			location: "Vue Picadilly, London"
+		},
+		{
+			movie_id: 2,
+			title: "Goodbye world",
+			attendee: [],
+			date: "2020-01-02T00:00:00Z",
+			genre: "Comedy",
+			location: "ODEAN Picadilly, London"
+		},
+		{
+			movie_id: 3,
+			title: "This world",
+			attendee: [],
+			date: "2020-01-03T00:00:00Z",
+			genre: "Romance",
+			location: "ODEAN Tottenham Court Road, London"
 		}
 	],
 	users: [
