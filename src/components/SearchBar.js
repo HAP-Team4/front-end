@@ -7,6 +7,10 @@ class SearchBar extends Component {
   }
 
   setValue = (value) => {
+    if (value === "") {
+      this.props.updateMovies(null);
+      return
+    }
     this.props.updateMovies(this.props.data.filter(m => m.title.toLowerCase().indexOf(value.toLowerCase()) >= 0));
   }
 
