@@ -125,12 +125,11 @@ export class Main extends React.Component {
 				<div className="right">
 					{current_uid === null ? (
 						<div className="button" onClick={this.toggleOpenLoginForm}>Login</div>
-					) : (
-						<div>
-							Logged in as {current_uid}<br />
-							<div className="button-red" onClick={this.logout}>Logout</div>
-						</div>
-					)}
+					) : [
+						`Logged in as ${current_uid}`,
+						<div>&nbsp;</div>,
+						<div className="button-red" onClick={this.logout}>Logout</div>
+					]}
 					&nbsp;
 					<Modal isOpen={this.state.loginFormOpen} onRequestClose={this.closeLoginModal} style={{
 						content: {
