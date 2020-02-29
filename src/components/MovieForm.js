@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./MovieForm.css";
+import { create_movie, current_uid } from '../Main';
 
 class MovieForm extends Component {
   constructor(props) {
@@ -9,12 +10,16 @@ class MovieForm extends Component {
     this.state = {
       title: '',
       venues: 'Vue Picadilly',
+      genre: "",
       datetime: '',
       submitting: false
     }
   }
   handleChange = (e) => {
     this.setState({title: e.target.value});
+  }
+  handleChangeGenre = (e) => {
+    this.setState({genre: e.target.value});
   }
   handleCalendarChange = (datetime) => {
     this.setState({ datetime })
@@ -23,9 +28,18 @@ class MovieForm extends Component {
     this.setState({
       submitting: true
     })
+    create_movie({
+			title: this.state.title,
+			attendee: [current_uid],
+			date: new Date(this.state.datetime).toISOString(),
+			genre: this.state.genre,
+			location: this.state.venues
+    }).then(() => {
+      this.props.closeModal()
+    })
   }
   render() {
-    const { title, venues, datetime }  = this.state;
+    const { title, venues, datetime, genre }  = this.state;
     if (!this.state.submitting) {
       return (
         <div className="container movie-form form-model">
@@ -35,6 +49,13 @@ class MovieForm extends Component {
                 Movie Title:
                 <br></br>
                 <input type="text" value={title} onChange={this.handleChange}/>
+              </label>
+            </div>
+            <div className="row">
+              <label>
+                Genre:
+                <br></br>
+                <input type="text" value={genre} onChange={this.handleChangeGenre}/>
               </label>
             </div>
             <div className="row">

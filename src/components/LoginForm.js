@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./MovieForm.css";
+import { login } from '../Main';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class LoginForm extends Component {
     this.state = {
       username: '',
       password: '',
-      loading: false
+      loading: false,
+      error: null
     }
   }
   handleChange = (e) => {
@@ -21,6 +23,14 @@ class LoginForm extends Component {
   handleSubmit = (e) => {
     this.setState({
       loading: true
+    })
+    login(this.state.username, this.state.password).then(() => {
+      this.props.closeModal()
+    }, err => {
+      this.setState({
+        loading: false,
+        error: err.message
+      })
     })
   }
   render() {
@@ -51,6 +61,9 @@ class LoginForm extends Component {
             <div className="button" onClick={this.handleSubmit}>submit</div>
             <div className="button" onClick={this.props.closeModal}>cancel</div>
           </div>
+          {this.state.error ? (
+            <div className="error">{this.state.error}</div>
+          ) : null}
         </form>
       </div>
     )
