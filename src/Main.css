@@ -22,17 +22,19 @@
 }
 
 .topbar .left {
-	width: 200px;
+	width: 300px;
 	margin-right: auto;
 	justify-content: flex-start;
+	align-items: center;
 }
 .topbar .right {
-	width: 200px;
+	width: 300px;
 	margin-left: auto;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: flex-end;
+	align-items: center;
 }
 
 .topbar .appname {
