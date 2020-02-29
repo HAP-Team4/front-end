@@ -10,6 +10,7 @@ class MovieForm extends Component {
       title: '',
       venues: 'Vue Picadilly',
       datetime: '',
+      submitting: false
     }
   }
   handleChange = (e) => {
@@ -19,53 +20,61 @@ class MovieForm extends Component {
     this.setState({ datetime })
   }
   handleSubmit = (e) => {
-    // add post url
-    alert('A name was submitted: ' + this.state.datetime);
-    e.preventDefault();
+    this.setState({
+      submitting: true
+    })
   }
   render() {
     const { title, venues, datetime }  = this.state;
-    return (
-      <div className="container movie-form">
-        <form onSubmit={this.handleSubmit}>
-          <div className="button" onClick={this.props.closeModal}>close</div>
-          <div className="row">
-            <label>
-              Movie Title:
-              <br></br>
-              <input type="text" value={title} onChange={this.handleChange}/>
-            </label>
-          </div>
-          <div className="row">
-            <label>
-              Venue:&nbsp;
-              <br></br>
-              <select>
-                <option>
-                  {venues}
-                </option>
-              </select>
-            </label>
-          </div>
-          <div className="row">
-          <label>
-            Screening Date:
-            <div>
-                <DatePicker
-                  selected={datetime}
-                  onChange={this.handleCalendarChange}
-                  showTimeSelect
-                  dateFormat="Pp"
-                />
+    if (!this.state.submitting) {
+      return (
+        <div className="container movie-form">
+          <form>
+            <div className="row">
+              <label>
+                Movie Title:
+                <br></br>
+                <input type="text" value={title} onChange={this.handleChange}/>
+              </label>
             </div>
-          </label>
-          </div>
-          <div className="submit-contain">
-            <div className="button">submit</div>
-          </div>
-        </form>
-      </div>
-    )
+            <div className="row">
+              <label>
+                Venue:&nbsp;
+                <br></br>
+                <select>
+                  <option>
+                    {venues}
+                  </option>
+                </select>
+              </label>
+            </div>
+            <div className="row">
+            <label>
+              Screening Date:
+              <div>
+                  <DatePicker
+                    selected={datetime}
+                    onChange={this.handleCalendarChange}
+                    showTimeSelect
+                    dateFormat="Pp"
+                  />
+              </div>
+            </label>
+            </div>
+            <div className="submit-contain">
+              <div className="button" onClick={this.handleSubmit}>submit</div>
+              <div className="button" onClick={this.props.closeModal}>cancel</div>
+            </div>
+          </form>
+        </div>
+      )
+    } else {
+      return (
+        <div className="container movie-form" style={{textAlign: "center"}}>
+          Submitting&hellip;
+        </div>
+      )
+    }
   }
 }
 

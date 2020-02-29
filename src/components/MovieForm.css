@@ -1,5 +1,10 @@
 input {
   width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 1px #5bb899;
+  font-size: 20px;
+  line-height: 1.5;
 }
 
 .movie-form {
@@ -15,4 +20,9 @@ input {
 
 .movie-form .submit-contain {
   text-align: center;
+  margin-top: 10px;
+}
+
+.movie-form .submit-contain > * {
+  margin-right: 10px;
 }

@@ -92,7 +92,16 @@ export class Main extends React.Component {
 					<LoginForm closeModal={this.closeLoginModal}/>
 				</Modal>
 				<div className="button" onClick={this.toggleOpenMovieForm}>Create new movie</div>
-				<Modal isOpen={this.state.movieFormOpen} onRequestClose={this.closeModal}>
+				<Modal isOpen={this.state.movieFormOpen} onRequestClose={this.closeModal}  style={{
+					content: {
+						top: "50%",
+						left: "50%",
+						width: "500px",
+						bottom: "auto",
+						marginRight: "-50%",
+						transform: "translate(-50%,-50%)"
+					}
+				}}>
 					<MovieForm closeModal={this.closeModal}/>
 				</Modal>
 			</div>
