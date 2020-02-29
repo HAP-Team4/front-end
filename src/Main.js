@@ -6,6 +6,7 @@ import LoginForm from './components/LoginForm';
 import SearchBar from './components/SearchBar';
 import { Genre } from './Genre';
 import Modal from 'react-modal';
+import MyMovies from './MyMovies';
 
 export const server_base = "http://localhost:8080"
 export let current_uid = null
@@ -141,6 +142,7 @@ export class Main extends React.Component {
 
 			<div className="main-contain">
 				<SearchBar />
+				{current_uid !== null && <MyMovies all_movies={this.state.all_movies}/>}
 				{this.renderMovieList()}
 			</div>
 		</div>)
