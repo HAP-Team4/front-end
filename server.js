@@ -48,6 +48,10 @@ let db = {
 		{
 			id: "m@maowtm.org",
 			password: "1"
+		},
+		{
+			id: "Ziyun",
+			password: "xxx"
 		}
 	]
 };
