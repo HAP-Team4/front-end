@@ -25,6 +25,8 @@ export class Main extends React.Component {
 			most_recent: [],
 			genre_filter: null,
 			genres: [],
+			keyword_filter: false,
+			filtered_movies: []
 		};
 
 		this.request_all_movies();
@@ -141,15 +143,22 @@ export class Main extends React.Component {
 			</div>
 
 			<div className="main-contain">
-				<SearchBar />
+				<SearchBar updateMovies={this.filterSearchMovies} data={this.state.all_movies} />
 				{current_uid !== null && <MyMovies all_movies={this.state.all_movies}/>}
 				{this.renderMovieList()}
 			</div>
 		</div>)
 	}
 
+	filterSearchMovies = (filtered) => {
+		this.setState({
+			keyword_filter: true,
+			filtered_movies: filtered
+		});
+	}
+	
 	renderMovieList() {
-		if (this.state.genre_filter === null) {
+		if (this.state.genre_filter === null && !this.state.keyword_filter) {
 			return [
 				<h2>Featured</h2>,
 				<ListOfMovies data={this.state.featured_movies} />,
@@ -160,10 +169,15 @@ export class Main extends React.Component {
 				<h2>Most recent</h2>,
 				<ListOfMovies data={this.state.most_recent} />,
 			]
-		} else {
+		} else if (this.state.genre_filter) {
 			return [
 				<h2>{this.state.genre_filter} movies:</h2>,
 				<ListOfMovies data={this.state.all_movies.filter(x => x.genre === this.state.genre_filter)} />,
+			]
+		} else if (this.state.keyword_filter) {
+			return [
+				<h2>Search results:</h2>,
+				<ListOfMovies data={this.state.filtered_movies} />,
 			]
 		}
 	}
